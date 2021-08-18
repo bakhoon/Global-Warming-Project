@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div>
+    <div class="nav">
+        <fieldset style="border:0 none">
+            <ul>
+                <li><a href="/">Main Page</a></li>
+                <li><a href="/seatemp">Ocean Temperature</a></li>
+                <li><a href="/earthtemp">Global Average Temperature</a></li>
+                <li><a href="/co2">CO2 Atmosphere</a></li>
+                <li><a href="/sealevel">Sea Level</a></li>
+            </ul>
+        </fieldset>
+    </div>
+    <div class="input">
+        <form action="/co2" method="POST">
+            <p>From:
+                <select name="fromMonth">
+                    {% for month in getMonths %}
+                        {% if co2FromMonth == month %}
+                            <option value="{{ month }}" selected> {{ month }} </option>
+                        {% else %}
+                            <option value="{{ month }}"> {{ month }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <select name="fromYear">
+                    {% for year in getYears %}
+                        {% if co2FromYear == year %}
+                            <option value="{{ year }}" selected> {{ year }} </option>
+                        {% else %}
+                            <option value="{{ year }}"> {{ year }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                To:
+                <select name="toMonth">
+                    {% for month in getMonths %}
+                        {% if co2ToMonth == month %}
+                            <option value="{{ month }}" selected> {{ month }} </option>
+                        {% else %}
+                            <option value="{{ month }}"> {{ month }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <select name="toYear">
+                    {% for year in getYears %}
+                        {% if co2ToYear == year %}
+                            <option value="{{ year }}" selected> {{ year }} </option>
+                        {% else %}
+                            <option value="{{ year }}"> {{ year }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </p>
+            <button type="submit">Get Data</button>
+        </form>
+    </div>
+    <div>
+    {% if table == "None" %}
+    <p></p>
+    {% else %}
+        <p>
+            <img src="{{url_for('static', filename='/'.join(['thefile' + num + '.png']) )}}">
+            <img src="{{url_for('static', filename='/'.join(['Keys.PNG']) )}}">
+        </p>
+        <table>
+            <tr>
+                <th scope="Year"> Year</th>
+                <th scope="Month"> Month</th>
+                <th scope="CO2"> CO2 Concentration (PPM) </th>
+             </tr>
+                <tbody>
+                {% for year,month,co2 in table %}
+                    <tr>
+                        <td> {{ year }} </td>
+                        <td> {{ month }} </td>
+                        <td> {{ co2 }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+    {% endif %}
+    </div>
+</div></html>

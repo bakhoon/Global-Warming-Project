@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    *{box-sizing: border-box;}
+    body{background-color: antiquewhite;}
+    div.justtop{opacity: 0.5; transition: all 0.4s ease 0s;}
+    div.justtop:hover{opacity: 1;}
+    div.nav{position: fixed; top: 0px; width: 100%; background-color: whitesmoke; text-align: center;}
+    ul{list-style-type: none; display: inline-block;}
+    li {float: left; }
+    li a{color: black; background-color: whitesmoke; padding: 9px 25px; text-decoration: none; font-family:Arial, Helvetica, sans-serif;}
+    li a{transition: all 0.3s ease 0s;}
+    li a:hover{color: black; background-color: burlywood;}
+    li a:active{color:black; background-color: whitesmoke;}
+    a.pick{color: black; background-color: burlywood;}
+    div.all{margin: 20px;}
+    div.top{display: -webkit-flex; display: flex; height:600px; margin-top: 70px }
+    div.input{background-color: burlywood; -webkit-flex: 1; -ms-flex: 1; flex: 1; padding: 30px; border: 1px solid black;}
+    div.graph{background-color: burlywood; -webkit-flex: 2.5; -ms-flex: 2.5; flex: 2.5; text-align: center; border: 1px solid black;}
+    div.table{background-color: burlywood; text-align: center; border: 1px solid black;}
+    img.graph{height: 500px; weight: 100px; border: 1px solid black; margin: 30px; pointer-events: none}
+    img.keys{height: 200px; weight: 100px; border: 1px solid black; pointer-events: none}
+    table{width: 1200px; margin-left:30px; }
+    th{padding: 1px; background-color: #d15959; border: 1px groove #c9c9c9}
+    td{padding: 1px; background-color: #ffc0b4;}
+    </style>
+</head>
+<body>
+    <div class="justtop">
+    <div class="nav">
+        <fieldset style="border:0 none">
+            <ul>
+                <li><a href="/">Main Page</a></li>
+                <li><a href="/seatemp">Ocean Temperature</a></li>
+                <li><a href="/earthtemp">Earth Temperature</a></li>
+                <li><a href="/co2">CO2 Atmosphere</a></li>
+                <li><a class="pick">Sea Level</a></li>
+                <li><a href="">Sources</a></li>
+            </ul>
+        </fieldset>
+    </div>
+    </div>
+    <div class="all">
+    <div class="top">
+    <div class="graph">
+    {% if table == "None" %}
+    <p></p>
+    {% else %}
+        <p>
+            <img class="graph" src="{{url_for('static', filename='/'.join(['thefile' + num + '.png']) )}}">
+        </p>
+    {% endif %}
+    </div>
+    <div class="input">
+        <form action="/sealevel" method="POST">
+            <p>From:
+                <select name="fromMonth">
+                    {% for month in getMonths %}
+                        {% if sealFromMonth == month %}
+                            <option value="{{ month }}" selected> {{ month }} </option>
+                        {% else %}
+                            <option value="{{ month }}"> {{ month }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <select name="fromYear">
+                    {% for year in getYears %}
+                        {% if sealFromYear == year %}
+                            <option value="{{ year }}" selected> {{ year }} </option>
+                        {% else %}
+                            <option value="{{ year }}"> {{ year }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <br>
+            <br>
+                To:&nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="toMonth">
+                    {% for month in getMonths %}
+                        {% if sealToMonth == month %}
+                            <option value="{{ month }}" selected> {{ month }} </option>
+                        {% else %}
+                            <option value="{{ month }}"> {{ month }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <select name="toYear">
+                    {% for year in getYears %}
+                        {% if sealToYear == year %}
+                            <option value="{{ year }}" selected> {{ year }} </option>
+                        {% else %}
+                            <option value="{{ year }}"> {{ year }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </p>
+            <button type="submit">Get Data</button>
+        </form>
+    <br>
+        <img class="keys" src="{{url_for('static', filename='/'.join(['Keys.PNG']) )}}">
+    </div>
+
+    </div>
+    <div class="table" >
+    {% if table == "None" %}
+
+    {% else %}
+    <table>
+            <tr>
+                <th scope="Year"> Year</th>
+                <th scope="Month"> Month</th>
+                <th scope="mm"> Height (mm) </th>
+             </tr>
+                <tbody>
+                {% if table == "None" %}
+                <p></p>
+                {% else %}
+                {% for year,month,mm in table %}
+                    <tr>
+                        <td> {{ year }} </td>
+                        <td> {{ month }} </td>
+                        <td> {{ mm }} </td>
+                    </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
+        </table>
+    {% endif %}
+    </div>
+    </div>
+</body>
+</html>

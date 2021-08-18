@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="nav">
+        <fieldset style="border:0 none">
+            <ul>
+                <li><a href="/">Main Page</a></li>
+                <li><a href="/seatemp">Ocean Temperature</a></li>
+                <li><a href="/earthtemp">Global Average Temperature</a></li>
+                <li><a href="/co2">CO2 Atmosphere</a></li>
+                <li><a href="/sealevel">Sea Level</a></li>
+            </ul>
+        </fieldset>
+    </div>
+    <div class="input">
+        <form action="/earthtemp" method="POST">
+            <p>Source:
+                <select name="source">
+                    {% if earthSource == 'GCAG' %}
+                    <option value="GCAG" selected>GCAG</option>
+                    <option value="GISTEMP">GISTEMP</option>
+                    {% elif earthSource == 'GISTEMP' %}
+                    <option value="GCAG" >GCAG</option>
+                    <option value="GISTEMP" selected>GISTEMP</option>
+                    {% else %}
+                    <option value="GCAG" >GCAG</option>
+                    <option value="GISTEMP" >GISTEMP</option>
+                    {% endif %}
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Graph:
+
+                {% if earthMonth == 'January' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January" selected>January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                {% elif earthMonth == 'February' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February" selected>February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                {% elif earthMonth == 'March' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February" >February</option>
+                    <option value="March" selected>March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                {% elif earthMonth == 'April' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February" >February</option>
+                    <option value="March">March</option>
+                    <option value="April" selected>April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                {% elif earthMonth == 'May' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February" >February</option>
+                    <option value="March" >March</option>
+                    <option value="April">April</option>
+                    <option value="May" selected>May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                {% elif earthMonth == 'June' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February" >February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June" selected>June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                {% elif earthMonth == 'July' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February" >February</option>
+                    <option value="March" >March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July" selected>July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                {% elif earthMonth == 'August' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February" >February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August" selected>August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                {% elif earthMonth == 'September' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February" >February</option>
+                    <option value="March" >March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September" selected>September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                {% elif earthMonth == 'October' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February" >February</option>
+                    <option value="March" >March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October" selected>October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                {% elif earthMonth == 'November' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November" selected>November</option>
+                    <option value="December">December</option>
+                </select>
+                {% elif earthMonth == 'December' %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December" selected>December</option>
+                </select>
+                {% else %}
+                <select name="monthlist">
+                    <option value="Total">Total</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                {% endif %}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Temperature Type
+                <select name="temperature">
+                    {% if earthCF == 'F' %}
+                        <option value="F" selected> Fahrenheit </option>
+                        <option value="C"> Celsius </option>
+                    {% elif earthCF == 'C' %}
+                        <option value="F"> Fahrenheit </option>
+                        <option value="C" selected> Celsius </option>
+                    {% else %}
+                        <option value="F"> Fahrenheit </option>
+                        <option value="C"> Celsius </option>
+                    {% endif %}
+                </select>
+            </p>
+            <p>From:
+                <select name="fromYear">
+                    {% for year in getYears %}
+                        {% if earthFrom == year %}
+                            <option value="{{ year }}" selected> {{ year }} </option>
+                        {% else %}
+                            <option value="{{ year }}"> {{ year }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                To:
+                <select name="toYear">
+                    {% for year in getYears %}
+                        {% if earthTo == year %}
+                            <option value="{{ year }}" selected> {{ year }} </option>
+                        {% else %}
+                            <option value="{{ year }}"> {{ year }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </p>
+
+            <button type="submit">Get Data</button>
+        </form>
+    </div>
+    <div>
+        {% if getCF == "C" %}
+            <p>
+                <img src="{{url_for('static', filename='/'.join(['thefile' + num + '.png']) )}}">
+                <img src="{{url_for('static', filename='/'.join(['Keys.PNG']) )}}">
+            </p>
+            <table>
+                <tr>
+                    <th scope="Year"> Year</th>
+                    <th scope="Month"> Month</th>
+                    <th scope="C"> Temperature (C) </th>
+                 </tr>
+                    <tbody>
+                    {% for year,month,C in table %}
+                        <tr>
+                            <td> {{ year }} </td>
+                            <td> {{ month }} </td>
+                            <td> {{ C }} </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+            </table>
+        {% elif getCF == "F" %}
+            <p>
+                <img src="{{url_for('static', filename='/'.join(['thefile' + num + '.png']) )}}">
+                <img src="{{url_for('static', filename='/'.join(['Keys.PNG']) )}}">
+            </p>
+            <table>
+                <tr>
+                    <th scope="Year"> Year</th>
+                    <th scope="Month"> Month</th>
+                    <th scope="F"> Temperature (F) </th>
+                 </tr>
+                    <tbody>
+                    {% for year,month,F in table %}
+                        <tr>
+                            <td> {{ year }} </td>
+                            <td> {{ month }} </td>
+                            <td> {{ F }} </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+            </table>
+        {% elif getCF == "None" %}
+            <p></p>
+        {% endif %}
+    </div>
+</body>
+</html>
